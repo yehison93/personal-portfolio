@@ -1,0 +1,21 @@
+---
+import PageAsigned from "../components/PageAsigned.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+const pageTitle = "Blog";
+const allPosts = await Astro.glob("../pages/posts/*.md");
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p>Aquí es donde publicaré acerca de mi viaje aprendiendo Astro.</p>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <li>
+          <PageAsigned url={post.url} name={post.frontmatter.title} />
+        </li>
+      ))
+    }
+  </ul>
+  <PageAsigned url="/tags" name="Busqueda por etiquetas" />
+</BaseLayout>

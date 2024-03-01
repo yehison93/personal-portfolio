@@ -1,0 +1,39 @@
+---
+import PageAsigned from "../../components/PageAsigned.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import formatDate from "../../scripts/formatDate.js";
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob("../posts/*.md");
+
+  return allPosts
+    .reduce((acc, post) => [...new Set([...acc, ...post.frontmatter.tags])], [])
+    .filter((tag) => tag && /\S/.test(tag))
+    .map((post) => {
+      return {
+        params: { tag: post },
+        props: { posts: allPosts },
+      };
+    });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const filteredPosts = posts.filter((post) =>
+  post.frontmatter.tags?.includes(tag)
+);
+---
+
+<BaseLayout pageTitle={`Etiqueta: ${tag}`}>
+  <p>Entradas etiquetadas con la etiqueta {tag}</p>
+  <ul>
+    {
+      filteredPosts.map((post) => (
+        <li>
+          <PageAsigned url={post.url} name={post.frontmatter.title} />
+          Pubicado:{formatDate(post.frontmatter.pubDate)}
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

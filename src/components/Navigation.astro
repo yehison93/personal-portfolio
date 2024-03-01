@@ -1,0 +1,18 @@
+---
+import PageAsigned from "../components/PageAsigned.astro";
+
+const allPage = {
+  Home: "/",
+  "Sobre Mi": "/about",
+  Blog: "/blog",
+  Etiquetas: "/tags",
+};
+---
+
+<div class="nav-links">
+  {
+    Object.entries(allPage).map(([key, value]) => (
+      <PageAsigned url={value} name={key} />
+    ))
+  }
+</div>

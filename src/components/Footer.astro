@@ -1,0 +1,27 @@
+---
+import Social from "./Social.astro";
+const socialLink = {
+  twitter: "yehison93",
+  gitHub: "yehison93",
+  youtube: "yehison93",
+  instagram: "yehison93",
+};
+---
+
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
+
+<footer>
+  {
+    Object.entries(socialLink).map(([key, value]) => (
+      <>
+        <Social platform={key} username={value} />
+      </>
+    ))
+  }
+</footer>

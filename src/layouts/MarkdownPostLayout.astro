@@ -1,0 +1,47 @@
+---
+const { frontmatter } = Astro.props;
+import BaseLayout from "./BaseLayout.astro";
+import PageAsigned from "../components/PageAsigned.astro";
+import formatDate from "../scripts/formatDate.js";
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <p>Escrito por {frontmatter.author}</p>
+  <p>
+    Publicado el: {formatDate(frontmatter.pubDate)}
+  </p>
+  <img
+    style={{ maxWidth: "300px" }}
+    src={frontmatter.image.url}
+    alt={frontmatter.image.alt}
+  />
+  <ul class="tags">
+    {
+      frontmatter.tags.map((tagPage) => (
+        <li class="tag">
+          <PageAsigned url={`/tags/${tagPage}`} name={tagPage} />
+        </li>
+      ))
+    }
+  </ul>
+
+  <slot />
+</BaseLayout>
+
+<style>
+  .tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    box-shadow: 0 0 10px black;
+    border-radius: 10%;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    list-style: none;
+    background-color: #a1a1a1;
+  }
+</style>

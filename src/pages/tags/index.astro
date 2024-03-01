@@ -1,0 +1,44 @@
+---
+import PageAsigned from "../../components/PageAsigned.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const pageTitle = "Busqueda por Etiquetas";
+const allPosts = await Astro.glob("../posts/*.md");
+const allTags = allPosts.reduce(
+  (acc, post) => {
+    return [...new Set([...acc, ...post.frontmatter.tags])];
+  },
+  [""]
+);
+---
+
+<style>
+  .tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    box-shadow: 0 0 10px black;
+    border-radius: 10%;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+    list-style: none;
+    background-color: #a1a1a1;
+  }
+</style>
+
+<BaseLayout pageTitle={pageTitle}>
+  <ul class="tags">
+    {
+      allTags
+        .filter((tag) => tag && /\S/.test(tag))
+        .map((tag) => (
+          <li class="tag">
+            <PageAsigned url={`/tags/${tag}`} name={tag} />
+          </li>
+        ))
+    }
+  </ul>
+</BaseLayout>

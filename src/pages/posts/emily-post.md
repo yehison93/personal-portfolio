@@ -5,7 +5,7 @@ pubDate: 2024-2-3
 description: "Blog sobre Emily la diseñadora"
 author: "Yehison"
 image:
-  url: "[https://docs.astro.build/assets/full-logo-light.png](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmNmzcUGfYxw4FEBB3uH9JFCDxy3cs4KK6xQ&usqp=CAU)"
+  url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmNmzcUGfYxw4FEBB3uH9JFCDxy3cs4KK6xQ&usqp=CAU"
   alt: "Emily"
 tags: ["Emily", "bloguear", "Diseno"]
 ---
